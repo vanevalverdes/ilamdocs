@@ -1,0 +1,55 @@
+{{define "title"}}
+    Categoría
+{{end}}
+
+
+{{define "body"}}
+<style>
+.btn-outline-secondary, .btn-outline-secondary:hover {
+    color: #6a6a6a;
+    border-color: #8a8a8a;
+    border-width: .1rem;
+  }
+  .btn-group, .btn-group:hover {
+    box-shadow: none;
+  }
+</style>
+<section class="py-5 text-center fluid-container bg-light">
+    <div class="row py-lg-5">
+      <div class="col-lg-6 col-md-8 mx-auto">
+        <h1 class="fw-light">{{.catTitle}}</h1>
+        <p class="lead text-muted">{{.catDescription}}</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="album py-5">
+    <div class="container">
+
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        {{range $k, $value := .records}}
+        <div class="col">
+            <div class="card shadow-sm">
+              <a href="/doc/{{$value.PublicId}}/">
+              <img class="bd-placeholder-img card-img-top" width="100%" height="225" src="/api/files/xc29e15895cpu0s/{{$value.Id}}/{{$value.Portada}}"/>
+              </a>
+              <div class="card-body">
+                <h3 class="card-text">{{$value.Title}}</h3>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group">
+                    <a href="/doc/{{$value.PublicId}}/" class="btn btn-sm btn-outline-secondary">Ver</a>
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        {{end}}
+
+      </div>
+    </div>
+  </div>
+
+
+{{end}}
+

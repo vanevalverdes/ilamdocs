@@ -1,0 +1,38 @@
+{{define "title"}}
+    Documento {{.record.title}}
+{{end}}
+
+
+{{define "body"}}
+    {{if .record.published}}
+    <section class="py-5 text-center fluid-container bg-light">
+        <div class="row py-lg-5">
+        <div class="col-lg-6 col-md-8 mx-auto">
+            <h1 class="fw-light">{{.record.title}}</h1>
+        </div>
+        </div>
+    </section>
+
+    <div class="py-5 container">
+        <div class="row">
+            <div class="col-sm-4">
+                <img class="img-fluid" src="/api/files/{{.record.collectionId}}/{{.record.id}}/{{.record.portada}}"/>
+            </div>
+            <div class="col-sm-8">
+                    <h3>{{.record.title}}</h3>
+                    <p><b>Descripción: </b>{{.record.description | raw}}</p>
+                    <p><b>Autor: </b>{{.record.author}}</p>
+                    <p><b>Fecha de Publicación: </b>{{.record.date_published}}</p>
+                    <p><b>Lugar de Publicación: </b>{{.record.place_published}}</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <a href="/api/files/{{.record.collectionId}}/{{.record.id}}/{{.record.attachment}}?download=1" class="btn btn-sm btn-outline-secondary" style="border-color:#85236d; background-color: #85236d;color:#fff;">Descargar</a>
+                        <small>Vistas: {{.record.views}} / Descargas: {{.record.downloads}}</small>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{end}}
+{{end}}
+

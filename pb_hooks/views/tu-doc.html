@@ -1,0 +1,22 @@
+{{define "title"}}
+    {{.record.title}}
+{{end}}
+
+
+{{define "body"}}
+    <section class="py-5 text-center fluid-container bg-light">
+        <div class="row py-lg-5">
+        <div class="col-lg-6 col-md-8 mx-auto">
+            <h1 class="fw-light">{{.record.title}}</h1>
+        </div>
+        </div>
+    </section>
+    <section class="py-5 fluid-container">
+        <div class="row py-lg-5">
+        <div class="col-lg-6 col-md-8 mx-auto" style="text-align: justify;">
+            <p>{{.record.content_one | raw}}</p>
+        </div>
+        </div>
+    </section>
+{{end}}
+

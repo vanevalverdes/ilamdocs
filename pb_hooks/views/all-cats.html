@@ -1,0 +1,17 @@
+{{define "body"}}
+<table>
+    {{range $k, $value := .records}}
+    <tr>
+        <td>
+            {{$value.Id}}
+        </td>
+        <td>
+            {{$value.Title}}
+        </td>
+        <td>
+            {{$value.PublicId}}
+        </td>
+    </tr>
+    {{end}}
+</table>
+{{end}}
