@@ -15,19 +15,44 @@
 
     <div class="py-5 container">
         <div class="row">
-            <div class="col-sm-4">
-                <img class="img-fluid" src="/api/files/{{.record.collectionId}}/{{.record.id}}/{{.record.portada}}"/>
+            {{if .record.isVideo}}
+            <div class="col-sm-6">
+                {{.record.embedCode | raw}}
             </div>
-            <div class="col-sm-8">
+            <div class="col-sm-6">
                     <h3>{{.record.title}}</h3>
-                    <p><b>Descripción: </b>{{.record.description | raw}}</p>
-                    <p><b>Autor: </b>{{.record.author}}</p>
-                    <p><b>Fecha de Publicación: </b>{{.record.date_published}}</p>
-                    <p><b>Lugar de Publicación: </b>{{.record.place_published}}</p>
+                    <small>Vistas: {{.record.views}} / Descargas: {{.record.downloads}}</small>
+                    {{if .record.description}}<p><b>Descripción: </b>{{.record.description | raw}}</p>{{end}}
+                    {{if .record.author}}<p><b>Autor: </b>{{.record.author}}</p>{{end}}
+                    {{if .record.videoLenght}}<p><b>Duración: </b>{{.record.videoLenght}}</p>{{end}}
+                    {{if .record.date_published}}<p><b>Fecha de Publicación: </b>{{.record.date_published}}</p>{{end}}
+                    {{if .record.place_published}}<p><b>Lugar de Publicación: </b>{{.record.place_published}}</p>{{end}}
+                    {{if .record.sourceVideo}}<p><b>URL original: </b><a href="{{.record.sourceVideo}}">{{.record.sourceVideo}}</a></p>{{end}}
+                    {{if .record.language}}<p><b>Idioma original: </b>{{.record.language}}</p>{{end}}
+                    <div class="d-flex justify-content-between align-items-center">
+                        <small>Vistas: {{.record.views}}</small>
+                    </div>
+                    {{else}}
+                    <div class="col-sm-4">
+                        <img class="img-fluid" src="/api/files/{{.record.collectionId}}/{{.record.id}}/{{.record.portada}}"/>
+                    </div>
+                    <div class="col-sm-8">
+                            <h3>{{.record.title}}</h3>
+                            <h4>Revista: {{.record.titleReview}}</h4>
+                            <small>Vistas: {{.record.views}} / Descargas: {{.record.downloads}}</small>
+                            {{if .record.volume}}<p><b>Volumen: </b>{{.record.volume}}</p>{{end}}
+                            {{if .record.description}}<p><b>Descripción: </b>{{.record.description | raw}}</p>{{end}}
+                            {{if .record.author}}<p><b>Autor: </b>{{.record.author}}</p>{{end}}
+                            {{if .record.language}}<p><b>Idioma original: </b>{{.record.language}}</p> {{end}}
+                            {{if .record.translateTitle}}<p><b>Título en idioma original: </b>{{.record.translateTitle}}</p> {{end}}
+                            {{if .record.editor}}<p><b>Editorial: </b>{{.record.editor}}</p>{{end}}
+                            {{if .record.date_published}}<p><b>Fecha de Publicación: </b>{{.record.date_published}}</p>{{end}}
+                            {{if .record.place_published}}<p><b>Lugar de Publicación: </b>{{.record.place_published}}</p>{{end}}
+                            {{if .record.sourceWeb}}<p><b>URL original: </b><a href="{{.record.sourceWeb}}">{{.record.sourceWeb}}</a></p>{{end}}
                     <div class="d-flex justify-content-between align-items-center">
                         <a href="/api/files/{{.record.collectionId}}/{{.record.id}}/{{.record.attachment}}?download=1" class="btn btn-sm btn-outline-secondary" style="border-color:#85236d; background-color: #85236d;color:#fff;">Descargar</a>
-                        <small>Vistas: {{.record.views}} / Descargas: {{.record.downloads}}</small>
                     </div>
+                    {{end}}
                 </div>
                 </div>
             </div>
