@@ -1,6 +1,6 @@
 # ilamdocs
 
-A partir del 10/2023 el Centro de Documentación Virtual del Instituto ILAM **-ILAMDOCS-** utiliza para construir su base de datos, la aplicación de código abierto [Pocketbase](https://pocketbase.io).
+A partir del 10/2023 el [Centro de Documentación Virtual del Instituto ILAM **-ILAMDOCS-**](https://ilamdocs.org) utiliza para construir su base de datos, la aplicación de código abierto [Pocketbase](https://pocketbase.io).
 
 En este repositorio se pueden encontrar los archivos básicos de la aplicación ILAMDOCS, que pueden ser utilizados por cualquier institución para reproducir su propia plataforma de documentación.
 
