@@ -1,10 +1,15 @@
 routerAdd("get", "/", (c) => {
-  const html = $template.loadFiles(
-      `${__hooks}/views/index.html`,
-  ).render({
-  })
-
-  return c.html(200, html)
+  try {
+    const html = $template.loadFiles(
+      `${__hooks}/views/layout.html`,
+    `${__hooks}/views/index.html`,
+    ).render({
+    })
+    return c.html(200, html)
+  }
+  catch (error) {
+    return console.log(error)
+  }
 })
 routerAdd("get", "/cat/:publicId/", (c) => {
   const publicId = c.pathParam("publicId")
@@ -126,6 +131,40 @@ catch (error) {
 	return console.log(error)
 }
 
+})
+
+
+routerAdd("get", "/documento/:publicId/", (c) => {
+ const publicId = c.pathParam("publicId")
+  let record;
+
+  if (Number.isInteger(parseInt(publicId))) {
+    record = $app.dao().findFirstRecordByFilter(
+      "document", "publicId = {:publicId}",
+      { publicId: parseInt(publicId) }
+    );
+  } else {
+    record = $app.dao().findFirstRecordByFilter(
+      "document", "id = {:publicId}",
+      { publicId: publicId }
+    );
+  }
+  
+  const recordExport = record.publicExport()
+
+try {
+  const html = $template.loadFiles(
+    `${__hooks}/views/layout.html`,
+    `${__hooks}/views/document.html`,
+  ).render({
+    "record": recordExport,
+    "descriptionA": record.getString("description"),
+  })
+  return c.html(200, html)
+}
+catch (error) {
+	return console.log(error)
+}
 })
 
 routerAdd("get", "/que-es-ilamdocs/", (c) => {
@@ -292,4 +331,36 @@ routerAdd("get", "/all-docs/", (c) => {
   catch (error) {
     return console.log(error)
   }
+})
+
+routerAdd("get", "/lector/:publicId/", (c) => {
+  const publicId = c.pathParam("publicId")
+   let record;
+ 
+   if (Number.isInteger(parseInt(publicId))) {
+     record = $app.dao().findFirstRecordByFilter(
+       "document", "publicId = {:publicId}",
+       { publicId: parseInt(publicId) }
+     );
+   } else {
+     record = $app.dao().findFirstRecordByFilter(
+       "document", "id = {:publicId}",
+       { publicId: publicId }
+     );
+   }
+   
+   const recordExport = record.publicExport()
+ 
+ try {
+   const html = $template.loadFiles(
+     `${__hooks}/views/viewer.html`,
+   ).render({
+     "record": recordExport,
+     "descriptionA": record.getString("description"),
+   })
+   return c.html(200, html)
+ }
+ catch (error) {
+   return console.log(error)
+ }
 })

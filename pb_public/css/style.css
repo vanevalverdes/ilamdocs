@@ -1,5 +1,6 @@
 .btn-primary.btn-purple {
     background-color: #85236d !important;
+    border-color: #85236d !important;
 }
 .navbar .nav-link, .dropdown-item {
     color: #606060 !important;
