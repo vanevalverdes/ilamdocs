@@ -1,5 +1,5 @@
 {{define "title"}}
-    {{.record.title}}
+    Tu documento en línea
 {{end}}
 
 
@@ -14,7 +14,55 @@
     <section class="py-5 fluid-container">
         <div class="row py-lg-5">
         <div class="col-lg-6 col-md-8 mx-auto" style="text-align: justify;">
-            <p>{{.record.content_one | raw}}</p>
+            {{if .recordSuccess}}
+            <div class="alert alert-success" role="alert">Hemos recibido tu documento. Usa este número de referencia si deseas consultar por su estado: {{.recordSuccess}}</div>
+            {{.record.content_one | raw}}
+            {{else}}
+            {{.record.content_one | raw}}
+            <form action="/upload" method="post" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label for="titulo" class="form-label">Título</label>
+                    <input type="text" class="form-control" id="titulo" name="title" required>
+                </div>
+                <div class="mb-3">
+                    <label for="autor" class="form-label">Autor</label>
+                    <input type="text" class="form-control" id="autor" name="author" required>
+                </div>
+                <div class="mb-3">
+                    <label for="contacto" class="form-label">Persona que envía</label>
+                    <input type="contacto" class="form-control" id="contacto" name="contact" required>
+                </div>
+                <div class="mb-3">
+                    <label for="correo" class="form-label">Correo electrónico</label>
+                    <input type="email" class="form-control" id="correo" name="email" required>
+                </div>
+                <div class="mb-3">
+                    <label for="fecha" class="form-label">Fecha de Publicación</label>
+                    <input type="text" class="form-control" id="fecha" name="date" required>
+                </div>
+                <div class="mb-3">
+                    <label for="descripcion" class="form-label">Descripción</label>
+                    <textarea class="form-control" id="descripcion" name="description" rows="3" required></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="categoria" class="form-label">Categoría sugerida</label>
+                    <input type="text" class="form-control" id="categoria" name="category" required>
+                </div>
+                <div class="mb-3">
+                    <label for="pais" class="form-label">País</label>
+                    <input type="text" class="form-control" id="pais" name="country" required>
+                </div>
+                <div class="mb-3">
+                    <label for="url" class="form-label">URL / Enlace a archivo en línea</label>
+                    <input type="url" class="form-control" id="url" name="url" >
+                </div>
+                <div class="mb-3">
+                    <label for="documento" class="form-label">Cargar documento</label>
+                    <input type="file" class="form-control" id="documento" name="file" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-purple">Enviar</button>
+            </form>
+            {{end}}
         </div>
         </div>
     </section>

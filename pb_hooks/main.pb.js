@@ -364,3 +364,47 @@ routerAdd("get", "/lector/:publicId/", (c) => {
    return console.log(error)
  }
 })
+
+routerAdd("post", "/upload", (c) => {
+  const collection = $app.dao().findCollectionByNameOrId("received_document")
+  
+  const record = new Record(collection)
+  
+  const form = new RecordUpsertForm($app, record)
+  
+  // regular fields
+  form.loadData({
+      "title": c.request().formValue("title"),
+      "author": c.request().formValue("author"),
+      "description": c.request().formValue("description"),
+      "date": c.request().formValue("date"),
+      "country": c.request().formValue("country"),
+      "email": c.request().formValue("email"),
+      "category": c.request().formValue("category"),
+      "url": c.request().formValue("url"),
+      "contact": c.request().formValue("contact"),
+    })
+
+    // multipart uploaded files
+    const [multipartFile, multipartHeader] = c.request().formFile("file")
+    
+    form.addFiles("file", $filesystem.fileFromMultipart(multipartHeader))
+    form.submit()
+    let recordPage;
+    recordPage = $app.dao().findRecordById("page", "urnjsvjc9rubhns")
+    const recordExport = recordPage.publicExport()
+    try {
+      const html = $template.loadFiles(
+        `${__hooks}/views/layout.html`,
+        `${__hooks}/views/tu-doc.html`,
+        ).render({
+          "recordSuccess": record.getString("id"),
+          "record": recordExport,
+        })
+        return c.html(200, html)
+      } catch (err) {
+        console.log(err)
+        throw new BadRequestError("failed to create record", err)
+  }
+  
+})
