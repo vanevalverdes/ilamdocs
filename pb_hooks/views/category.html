@@ -30,14 +30,14 @@
         {{range $k, $value := .records}}
         <div class="col">
             <div class="card shadow-sm">
-              <a href="/doc/{{$value.PublicId}}/">
+              <a href="/documento/{{$value.Id}}/">
               <img class="bd-placeholder-img card-img-top img-fluid" width="100%" height="225" src="/api/files/xc29e15895cpu0s/{{$value.Id}}/{{$value.Portada}}"/>
               </a>
               <div class="card-body">
                 <h3 class="card-text">{{$value.Title}}</h3>
                 <div class="d-flex justify-content-between align-items-center">
                   <div class="btn-group">
-                    <a href="/doc/{{$value.PublicId}}/" class="btn btn-md btn-outline-secondary"><i class="bi bi-file-earmark-text-fill"></i> Ir a la ficha técnica</a>
+                    <a href="/documento/{{$value.Id}}/" class="btn btn-md btn-outline-secondary"><i class="bi bi-file-earmark-text-fill"></i> Ir a la ficha técnica</a>
                     
                   </div>
                 </div>

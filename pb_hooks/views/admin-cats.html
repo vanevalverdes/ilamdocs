@@ -1,0 +1,45 @@
+{{define "body"}}
+<section class="py-5 text-center fluid-container bg-light">
+    <h1>Administrar Categorías Principales</h1>
+    <a href="/admin/">Regresar</a>
+</section>
+<section class="py-5 text-center fluid-container bg-white">
+    <div class="container">
+        {{if .result}}
+        {{.result | raw}}
+        {{end}}
+        <table class="table">
+            <thead>
+                <th>
+                    ID
+                </th>
+                <th>
+                    Titulo
+                </th>
+                <th>
+                    ID Publico
+                </th>
+                <th>
+                    
+                </th>
+            </thead>
+            {{range $k, $value := .records}}
+            <tr>
+                <td>
+                    {{$value.Id}}
+                </td>
+                <td>
+                    {{$value.Title}}
+                </td>
+                <td>
+                    {{$value.PublicId}}
+                </td>
+                <td>
+                    <a class="btn btn-primary btn-purple" href="/admin/cat/{{$value.Id}}/">Ver detalles</a>
+                </td>
+            </tr>
+            {{end}}
+        </table>
+    </div>
+</section>
+{{end}}

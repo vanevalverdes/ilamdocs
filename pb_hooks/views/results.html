@@ -1,0 +1,43 @@
+
+{{define "body"}}
+<section class="py-5 text-center fluid-container bg-light">
+    <div class="row py-lg-2">
+      <div class="col-lg-6 col-md-8 mx-auto">
+        <h1 class="fw-light">Resultados para:</h1>
+        <p class="lead text-muted">{{.searchtext}}</p>
+      </div>
+    </div>
+</section>
+<section class="py-5 text-center fluid-container bg-white">
+    <div class="row py-lg-2">
+      <div class="col-lg-6 col-md-8 mx-auto">
+          <table class="table">
+              <thead>
+                <th>ID</th>
+                <th>Titulo</th>
+                <th>Descripcion</th>
+                <th>Autor</th>
+              </thead>
+              {{range $k, $value := .records}}
+              <tr>
+                  <td>
+                      <a href="/documento/{{$value.Id}}/">
+                      {{$value.Id}}
+                      </a>
+                  </td>
+                  <td>
+                      {{$value.Title}}
+                  </td>
+                  <td>
+                      {{$value.Description | raw}}
+                  </td>
+                  <td>
+                      {{$value.Author}}
+                  </td>
+              </tr>
+              {{end}}
+          </table>
+      </div>
+    </div>
+</section>
+{{end}}
